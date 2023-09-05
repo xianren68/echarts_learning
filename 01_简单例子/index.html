@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01</title>
+    <style>
+        div{
+            height: 500px;
+            width: 600px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="one"></div>
+    <div id="two"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js">
+    </script>
+    <script>
+        // 引用cdn地址
+        const one = echarts.init(document.getElementById("one")) // 创建实例，接收一个dom元素作为参数
+        const two = echarts.init(document.getElementById("two"))
+        // 配置图表
+        one.setOption({
+            // 图表标题
+            title:{
+                text:"柱状图"
+            }, 
+            // 图例
+            legend:{
+                data:["价格"]
+            },
+            // x坐标数据
+            xAxis:{
+                data:["衬衫","羊毛衫","雪纺衫","裤子","短袖"],
+            },
+            // y坐标数据（根据数据自动生成）
+            yAxis:{},
+            // 数据系列
+            series:{
+                name:"价格", // 对应图例
+                type:"bar", // 图表类型
+                data:[10,40,30,70,20] // 图表每一项对应的数据(随着类型变化数据结构也会发生变化)
+            }
+
+        })
+        two.setOption({
+            // 图表标题
+            title:{
+                text:"饼图"
+            }, 
+            // 图例
+            legend:{
+                data:["销量"]
+            },
+            // 数据系列
+            series:{
+                name:"销量", // 对应图例
+                type:"pie", // 图表类型
+                data:[
+                    {value:10,name:'羊毛衫'},
+                    {value:20,name:'衬衫'},
+                    {value:30,name:'雪纺衫'},
+                    {value:25,name:'裤子'},
+                    {value:15,name:'短袖'},
+                ]
+            }
+
+        })
+    </script>
+</body>
+</html>
