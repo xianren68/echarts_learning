@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02</title>
+    <style>
+        #chart {
+            height: 600px;
+            width: 800px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chart">
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js">
+    </script>
+    <script>
+        const chart = echarts.init(document.getElementById("chart"))
+        // 姓
+        const nameList = [
+            '赵', '钱', '孙', '李', '周', '吴', '郑', '王', '冯', '陈', '褚', '卫', '蒋', '沈', '韩', '杨', '朱', '秦', '尤', '许', '何', '吕', '施', '张', '孔', '曹', '严', '华', '金', '魏', '陶', '姜', '戚', '谢', '邹', '喻', '柏', '水', '窦', '章', '云', '苏', '潘', '葛', '奚', '范', '彭', '郎', '鲁', '韦', '昌', '马', '苗', '凤', '花', '方', '俞', '任', '袁', '柳', '酆', '鲍', '史', '唐', '费', '廉', '岑', '薛', '雷', '贺', '倪', '汤', '滕', '殷', '罗', '毕', '郝', '邬', '安', '常', '乐', '于', '时', '傅', '皮', '卞', '齐', '康', '伍', '余', '元', '卜', '顾', '孟', '平', '黄', '和', '穆', '萧', '尹', '姚', '邵', '湛', '汪', '祁', '毛', '禹', '狄', '米', '贝', '明', '臧', '计', '伏', '成', '戴', '谈', '宋', '茅', '庞', '熊', '纪', '舒', '屈', '项', '祝', '董', '梁', '杜', '阮', '蓝', '闵', '席', '季', '麻', '强', '贾', '路', '娄', '危'
+        ]
+        // 图例数据
+        const legendData = []
+        // 系列数据
+        const seriesData = []
+        // 图例控制数据
+        const selectData = {}
+        function data() {
+            // 随机生成50个2字名
+            nameList.sort(() => Math.random() - 0.5)
+            for (let i = 0; i < 50; i++) {
+                const name = nameList[0] + nameList[1]
+                legendData.push(name)
+                // 随机生成数据,包含name和value
+                seriesData.push({ name: name, value: Math.round(Math.random() * 10000) })
+                // 只显示索引大于6的
+                selectData[name] = i < 6
+                // 去掉用过的
+                nameList.shift()
+                nameList.shift()
+            }
+        }
+        data()
+        console.log(legendData, seriesData, selectData)
+        chart.setOption({
+            title: {
+                text: '滚动图例演示'
+            },
+            tooltip: {
+                show: true
+            },
+            legend: {
+                type: 'scroll', // 图例滚动
+                orient: 'vertical', // 图例纵向排列
+                left: 'right', // 图例到容器最右边
+                data: legendData,
+                selected: selectData,
+                inactiveColor: '#000', // 设置未选中状态为黑色
+                inactiveBorderColor: '#008c8c', // 设置未选中边框颜色
+                inactiveBorderWidth: '1px', // 设置未选中宽度
+                scrollDataIndex: 3, //设置初始位置
+                pageButtonItemGap: 7, // 设置图例翻页与页信息间的距离
+                pageButtonGap: 7, //图例控制块和图例项之间的间隔
+                pageButtonPosition: 'start', // 图例块位置
+                pageFormatter: ({ current, total }) => {  // 设置页信息展示格式
+                    return current + ' -- ' + total
+                },
+                // pageIcons:{ // 设置按钮图标
+                //     vertical:''
+                // },
+                pageIconColor:'green', // 设置按钮颜色
+                pageIconInactiveColor:'red', // 无法点击时颜色
+                animation:true, // 开启翻页动画
+                animationDurationUpdate: 1500 // 动画时间1.5s
+            },
+            series: [{
+                type: 'pie',
+                data: seriesData
+            }]
+        })
+    </script>
+</body>
+
+</html>
