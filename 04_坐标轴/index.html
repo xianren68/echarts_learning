@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04</title>
+    <style>
+        #chart {
+        height: 600px;
+        width: 800px;
+    }
+    </style>
+</head>
+<body>
+    <div id="chart">
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <script>
+        const chart = echarts.init(document.getElementById("chart"))
+        chart.setOption({
+            // 图表标题
+            title:{
+                text:"柱状图"
+            }, 
+            // 图例
+            legend:{
+                data:["价格"]
+            },
+            // x坐标数据
+            xAxis:{
+                // position:'top', // 设置x轴位置
+                // offset:-20, // 设置x轴偏移量
+                type:'category',
+                data:["衬衫","羊毛衫","雪纺衫","裤子","短袖"],
+                name:'商品名', // 设置x轴名称
+                nameLocation:'start', // 设置名称显示的位置
+                nameGap:30, // 坐标轴名称与轴线间的距离
+                nameRotate:45, // 坐标轴名字旋转角度
+                // inverse:true, // 是否反向坐标
+                // boundaryGap:false, // 不留白
+                axisLine:{
+                    show:true, // 展示轴线
+                    // onzero:true, // 对齐x，y零刻度
+                    symbol:['none','arrow'], // 只在末端显示箭头
+                    symbolSize:[10,20], // 设置箭头大小
+                    symbolOffset:[0,30], // 箭头偏移量
+                    lineStyle:{
+                        color:"#008c8c", // 设置轴线颜色
+                    },
+                },
+                axisTick:{
+                    show:true, // 展示刻度线
+                    inside:false, // 刻度线向外
+                    length:10, // 刻度线长度
+                    alignWithLabel:true, // 刻度线与标签对齐
+                    lineStyle:{
+                        color:'red' // 刻度线颜色
+                    }
+                }
+
+            },
+            // y坐标数据（根据数据自动生成）
+            yAxis:{},
+            // 数据系列
+            series:{
+                name:"价格", // 对应图例
+                type:"bar", // 图表类型
+                data:[10,40,30,70,20] // 图表每一项对应的数据(随着类型变化数据结构也会发生变化)
+            }
+
+        })
+    </script>
+</body>
+</html>
