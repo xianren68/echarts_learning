@@ -57,7 +57,26 @@
                     lineStyle:{
                         color:'red' // 刻度线颜色
                     }
+                },
+                axisLabel:{ // 标签设置
+                    show:true, // 展示标签
+                    rotate:45, // 标签旋转角度
+                    interval:1, // 标签隔一个显示一个
+                },
+                splitLine:{ // 分割线
+                    show:true, // 展示分割线
+                    lineStyle:{ 
+                        color:["#fca"] // 分割线颜色，可设置多个，分割线会循环使用这些颜色
+                    }
+                },
+                splitArea:{ // 分割区域
+                    show:true, // 展示
+                    areaStyle:{ 
+                        // 分割区域颜色,深浅间隔
+                        color:['rgba(250,250,250,1)','rgba(200,200,200,0.3)']
+                    }
                 }
+
 
             },
             // y坐标数据（根据数据自动生成）
